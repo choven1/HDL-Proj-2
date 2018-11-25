@@ -9,7 +9,8 @@ module  SingleCycleProcessor(DBtheRegVal,Instr,DBtheReg,clk,reset);
   input           clk, reset;
 
   wire            PCSrc, MemtoReg, MemWrite, ALUSrc;
-  wire    [2:0]   ALUControl, ImmSrc, RegSrc;
+  wire    [1:0]   ImmSrc, RegSrc;
+  wire    [2:0]   ALUControl;
   wire    [31:0]  Instr, PCPrime, PCPlus4, PCPlus8, Result, ReadData,
                   ALUResult, SrcA, SrcB, RD2, WriteData, ExtImm;
   wire    [3:0]   RA1, RA2, ALUFlags;

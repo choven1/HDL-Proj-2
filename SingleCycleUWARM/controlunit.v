@@ -6,14 +6,16 @@
 module controlunit(PCSrc,MemtoReg,MemWrite,ALUControl,ALUSrc,ImmSrc,RegWrite,RegSrc,
                    Instr,Flags,clk);
   output          PCSrc, MemtoReg, MemWrite,ALUSrc,RegWrite;
-  output [2:0]    ALUControl, ImmSrc, RegSrc;
+  output [1:0]    ImmSrc, RegSrc;
+  output [2:0]    ALUControl;
   input  [31:0]   Instr;
   input  [3:0]    Flags;
   input           clk;
 
   reg             N,Z,C,V;    // For processor storage of status flags
   reg             CondEx;     // Is the condition satisfied for storage
-  reg    [2:0]    ALUControl, FlagW;
+  reg    [1:0]    FlagW;
+  reg    [2:0]    ALUControl;
 
   // Parsing of Instr into identifiable segments.
   wire   [3:0]    Cond, Rd;
@@ -50,7 +52,7 @@ module controlunit(PCSrc,MemtoReg,MemWrite,ALUControl,ALUSrc,ImmSrc,RegWrite,Reg
   // Build the logic of Table 7.3, the ALU Decoder
   always @(ALUOp,Funct,S)
     case(ALUOp)
-      1'b0:   {ALUControl,FlagW} = 4'b00_00;
+      1'b0:   {ALUControl,FlagW} = 4'b000_00;
       1'b1:   case({Funct[4:1],S})
                 5'b0100_0:  {ALUControl,FlagW} = 4'b000_00;  // ADD
                 5'b0100_1:  {ALUControl,FlagW} = 4'b000_11;  // ADDS
@@ -66,7 +68,7 @@ module controlunit(PCSrc,MemtoReg,MemWrite,ALUControl,ALUSrc,ImmSrc,RegWrite,Reg
                 5'b0001_1:  {ALUControl,FlagW} = 4'b100_10;  // EORs
                 default:    {ALUControl,FlagW} = 4'b00_00;  
               endcase
-      default: {ALUControl,FlagW} = 4'b00_00;
+      default: {ALUControl,FlagW} = 4'b000_00;
     endcase
 
   // The processor storage of status flags
