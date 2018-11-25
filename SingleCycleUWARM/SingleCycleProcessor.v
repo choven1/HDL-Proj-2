@@ -3,13 +3,13 @@
 // "Digital Design and Computer Architecture ARM EDITION," S.L. Harris and D.M. Harris.
 // EE 4490 adapted from code by Jerry C. Hamann
 
-module  SingleCycleProcessor(DBtheRegVal,DBtheReg,clk,reset);
-  output  [31:0]  DBtheRegVal;
+module  SingleCycleProcessor(DBtheRegVal,Instr,DBtheReg,clk,reset);
+  output  [31:0]  DBtheRegVal, Instr;
   input   [3:0]   DBtheReg;
   input           clk, reset;
 
   wire            PCSrc, MemtoReg, MemWrite, ALUSrc;
-  wire    [1:0]   ALUControl, ImmSrc, RegSrc;
+  wire    [2:0]   ALUControl, ImmSrc, RegSrc;
   wire    [31:0]  Instr, PCPrime, PCPlus4, PCPlus8, Result, ReadData,
                   ALUResult, SrcA, SrcB, RD2, WriteData, ExtImm;
   wire    [3:0]   RA1, RA2, ALUFlags;

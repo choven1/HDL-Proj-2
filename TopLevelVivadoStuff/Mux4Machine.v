@@ -33,13 +33,17 @@ module Mux4Machine(muxd,adrive,A,B,C,D,clk,reset,blank);
   always @(S)
     nS = S + 1;
 
-  always @(S[NUMSVAR:NUMSVAR-1] or A or B or C or D or blank)
+  always @(S[NUMSVAR:NUMSVAR-2] or A or B or C or D or blank)
   begin
-    case(S[NUMSVAR:NUMSVAR-1])
-        2'b11: begin muxd=A; adrive=(!blank[3] ? 4'b0111 : 4'b1111); end
-        2'b10: begin muxd=B; adrive=(!blank[2] ? 4'b1011 : 4'b1111); end
-        2'b01: begin muxd=C; adrive=(!blank[1] ? 4'b1101 : 4'b1111); end
-        2'b00: begin muxd=D; adrive=(!blank[0] ? 4'b1110 : 4'b1111); end
+    case(S[NUMSVAR:NUMSVAR-2])
+        3'b111: begin muxd=A; adrive=(!blank[3] ? 4'b0111 : 4'b1111); end
+        3'b110: begin muxd=A; adrive=(4'b1111); end
+        3'b101: begin muxd=B; adrive=(!blank[2] ? 4'b1011 : 4'b1111); end
+        3'b100: begin muxd=A; adrive=(4'b1111); end
+        3'b011: begin muxd=C; adrive=(!blank[1] ? 4'b1101 : 4'b1111); end
+        3'b010: begin muxd=A; adrive=(4'b1111); end
+        3'b001: begin muxd=D; adrive=(!blank[0] ? 4'b1110 : 4'b1111); end
+        3'b000: begin muxd=A; adrive=(4'b1111); end
         default: begin muxd=A; adrive=4'b1111; end
     endcase
   end

@@ -1,0 +1,74 @@
+1.) verilog output
+PC        Instr     Reg   Register Value
+------------------------------------------------------
+xxxxxxxx  xxxxxxxx    2   xxxxxxxx
+00000000  e2022000    2   00000000
+00000004  e3823000    2   00000000
+00000008  e3834005    2   00000000
+0000000c  e0822004    2   00000000
+00000010  e2544001    2   00000005
+00000014  1afffffc    2   00000005
+0000000c  e0822004    2   00000005
+00000010  e2544001    2   00000009
+00000014  1afffffc    2   00000009
+0000000c  e0822004    2   00000009
+00000010  e2544001    2   0000000c
+00000014  1afffffc    2   0000000c
+0000000c  e0822004    2   0000000c
+00000010  e2544001    2   0000000e
+00000014  1afffffc    2   0000000e
+0000000c  e0822004    2   0000000e
+00000010  e2544001    2   0000000f
+00000014  1afffffc    2   0000000f
+00000018  e5832000    2   0000000f
+0000001c  e5935000    2   0000000f
+00000020  eafffffe    2   0000000f
+
+2.) instruction functionality
+smallProg.s:
+Clears R2 to 0 with an AND
+Clears R3 to 0 with an OR
+Puts the value of R3 ORRed with 5 into R4 (R4=5)
+Adds the current value of R2 with R4 and stores in R2 (R2=5)
+Subtracts 1 from R4 and updates flags (R4=4)
+Branch to the add
+Adds the current value of R2 with R4 and stores in R2 (R2=9)
+Subtracts 1 from R4 and updates flags (R4=3)
+Branch to the add
+Adds the current value of R2 with R4 and stores in R2 (R2=C)
+Subtracts 1 from R4 and updates flags (R4=2)
+Branch to the add
+Adds the current value of R2 with R4 and stores in R2 (R2=E)
+Subtracts 1 from R4 and updates flags (R4=1)
+Branch to the add
+Adds the current value of R2 with R4 and stores in R2 (R2=F)
+Subtracts 1 from R4 and updates flags (R4=0)
+Ignores branch
+Stores the value of R2 into the address in R3
+Loads the value from the address in R3 into R5
+
+3.) Run in xilinx
+
+
+
+4.) displkay instruction on 7seg display
+added shut-offs to mux for ghosting
+added the instruction as an output of the processor
+added toggle switch to switch between register value and instruction value
+  toggle set to SW10
+
+5.) Implement CMPcd
+added lines 63 and 64 to controlunit.v to handle CMP operation
+    note: CMP always updates ALL flags and uses the ALU subtract
+adjusted line 42 to disable register write during compare action
+no changes necessary for conditional
+
+6.) Implement EORcdS
+controlunit.v:
+  added lines 65 and 66 to handle EOR operation
+      note: EOR only updates N and Z flags and uses a new ALU operation
+  no changes necessary for conditional
+alu.v:
+  added lines 42 through 47 to implement new ALU operation
+program wide:
+  changed ALUControl to 3-bits wide to allow additional operation.
