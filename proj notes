@@ -48,14 +48,16 @@ Stores the value of R2 into the address in R3
 Loads the value from the address in R3 into R5
 
 3.) Run in xilinx
+implementation went fine, over 100 warning and 1 critical warning, runs perfectly fine
+pictures taken as a proof of single stepping through
 
 
-
-4.) displkay instruction on 7seg display
+4.) Display instruction on 7seg display
 added shut-offs to mux for ghosting
 added the instruction as an output of the processor
 added toggle switch to switch between register value and instruction value
-  toggle set to SW10
+  toggle set to SW10 in the XDC file
+added an always block to the top level module to handle the new display toggle switch
 
 5.) Implement CMPcd
 added lines 63 and 64 to controlunit.v to handle CMP operation
@@ -72,3 +74,5 @@ alu.v:
   added lines 42 through 47 to implement new ALU operation
 program wide:
   changed ALUControl to 3-bits wide to allow additional operation.
+
+New instruction memory set to test the new functionality added to the system.
