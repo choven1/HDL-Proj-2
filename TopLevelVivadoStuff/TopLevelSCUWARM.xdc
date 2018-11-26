@@ -40,6 +40,9 @@ set_property PACKAGE_PIN W2  [get_ports {theReg[0]}]
 # SW11 (describes which portion of the 32-bit reg to display (low is bottom))
 set_property PACKAGE_PIN R3  [get_ports {TopHalf}]					
 	set_property IOSTANDARD LVCMOS33 [get_ports {TopHalf}]
+# SW10 (toggles between register value and instruction code on the display)
+set_property PACKAGE_PIN T2  [get_ports {DisplayTog}]					
+	set_property IOSTANDARD LVCMOS33 [get_ports {DisplayTog}]
 
 ## Seven Segment Display Segment Drives (active low, indexes a-0,...,g-6)
 set_property PACKAGE_PIN W7 [get_ports {sevenSegmentsa2g[0]}]					

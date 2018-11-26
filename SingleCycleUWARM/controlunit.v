@@ -54,19 +54,19 @@ module controlunit(PCSrc,MemtoReg,MemWrite,ALUControl,ALUSrc,ImmSrc,RegWrite,Reg
     case(ALUOp)
       1'b0:   {ALUControl,FlagW} = 4'b000_00;
       1'b1:   case({Funct[4:1],S})
-                5'b0100_0:  {ALUControl,FlagW} = 4'b000_00;  // ADD
-                5'b0100_1:  {ALUControl,FlagW} = 4'b000_11;  // ADDS
-                5'b0010_0:  {ALUControl,FlagW} = 4'b001_00;  // SUB
-                5'b0010_1:  {ALUControl,FlagW} = 4'b001_11;  // SUBS
-                5'b0000_0:  {ALUControl,FlagW} = 4'b010_00;  // AND
-                5'b0000_1:  {ALUControl,FlagW} = 4'b010_10;  // ANDS
-                5'b1100_0:  {ALUControl,FlagW} = 4'b011_00;  // ORR
-                5'b1100_1:  {ALUControl,FlagW} = 4'b011_10;  // ORRS
-                5'b1010_0:  {ALUControl,FlagW} = 4'b001_11;  // CMP
-                5'b1010_1:  {ALUControl,FlagW} = 4'b001_11;  // CMPS
-                5'b0001_0:  {ALUControl,FlagW} = 4'b100_00;  // EOR
-                5'b0001_1:  {ALUControl,FlagW} = 4'b100_10;  // EORs
-                default:    {ALUControl,FlagW} = 4'b00_00;  
+                5'b0100_0:  {ALUControl,FlagW} = 5'b000_00;  // ADD
+                5'b0100_1:  {ALUControl,FlagW} = 5'b000_11;  // ADDS
+                5'b0010_0:  {ALUControl,FlagW} = 5'b001_00;  // SUB
+                5'b0010_1:  {ALUControl,FlagW} = 5'b001_11;  // SUBS
+                5'b0000_0:  {ALUControl,FlagW} = 5'b010_00;  // AND
+                5'b0000_1:  {ALUControl,FlagW} = 5'b010_10;  // ANDS
+                5'b1100_0:  {ALUControl,FlagW} = 5'b011_00;  // ORR
+                5'b1100_1:  {ALUControl,FlagW} = 5'b011_10;  // ORRS
+                5'b1010_0:  {ALUControl,FlagW} = 5'b001_11;  // CMP
+                5'b1010_1:  {ALUControl,FlagW} = 5'b001_11;  // CMPS
+                5'b0001_0:  {ALUControl,FlagW} = 5'b100_00;  // EOR
+                5'b0001_1:  {ALUControl,FlagW} = 5'b100_10;  // EORs
+                default:    {ALUControl,FlagW} = 5'b00_00;  
               endcase
       default: {ALUControl,FlagW} = 4'b000_00;
     endcase
